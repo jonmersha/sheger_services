@@ -1,5 +1,16 @@
 const express = require('express');
 const app = express();
+
+const axios = require('axios');
+const fs = require('fs');
+const socketIO = require('socket.io');
+
+
+const util = require('util');
+const http = require('http');
+const server = http.createServer(app);
+const io = socketIO(server);
+
 const port = 3000;
 
 
@@ -65,6 +76,47 @@ app.use("/movie", movieService);
 
 
 // Start the server
-app.listen(port, () => {
+
+
+
+
+
+const videoUrl = 'https://service.besheger.com/static/itil.mp4'; // Replace with the actual video URL
+const downloadPath = '../public/movie'; // Replace with the desired download path
+const pipelineAsync = util.promisify(require('stream').pipeline);
+
+app.get('/save', async (req, res) => {
+  const fileName = 'itil4 from Smply learn.mp4';
+  const filePath = `${downloadPath}/${fileName}`;
+  
+
+  // Notify the client that the download has started
+  io.emit('download_started', 'Download started. Check back later for the file.');
+  res.send("Download Started")
+  // Initiate the video download
+  const writer = fs.createWriteStream(filePath);
+  const response = await axios.get(videoUrl, { responseType: 'stream', onDownloadProgress });
+
+  // Stream the video content to the file on the server
+  await pipelineAsync(response.data, writer);
+
+  console.log(`Downloaded: ${fileName}`);
+  io.emit('download_completed', 'Download completed. The file is ready for download.');
+}
+
+);
+
+function onDownloadProgress(progressEvent) {
+  const percentage = Math.floor((progressEvent.loaded / progressEvent.total) * 100);
+  console.log(percentage)
+  io.emit('download_progress', `Download progress: ${percentage}%`);
+}
+
+io.on('connection', (socket) => {
+  console.log('Client connected');
+});
+
+
+server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
