@@ -6,7 +6,7 @@ const port = 3000;
 app.use(express.json());
 app.use('/static', express.static('public'))
 app.get('/test',(req,res)=>{
-  res.send("NEw Server")
+  res.send("New Server")
 })
 ///Gojo serivice
 const gojoService = require("./src/modules/gojo/gojo");
@@ -17,5 +17,7 @@ const movieService = require("./src/modules/movie/movie");
 app.use("/movie", movieService);
 
 
-//app.listen();
-app.listen(port,()=>{console.log("Server Statrted @ ${port}")});
+//Remote Service Configurations
+app.listen();
+//Loca service Configurations
+//app.listen(port,()=>{console.log("Server Statrted @ ${port}")});
