@@ -29,26 +29,28 @@ const downloadPath = './public/movie'; // Replace with the desired download path
 
 const pipelineAsync = util.promisify(require('stream').pipeline);
 
+
 router.get('/service/get', async (req, res) => {
     const stm=selectOP.selectAll("movies");
    callFunc.addDataCallBack(stm,res);
   });
 
-  router.get('/save', async (req, res) => {
-  const fileName = 'Ferrari (2023).mp4';
-  const filePath = `${downloadPath}/${fileName}`;
+  router.get('/save',  (req, res) => {
+  // const fileName = 'Ferrari (2023).mp4';
+  // const filePath = `${downloadPath}/${fileName}`;
   
-  // Send an immediate response to the client
-  res.status(200).send('Download started. Check back later for the file.');
+  // // Send an immediate response to the client
+  // res.status(200).send('Download started. Check back later for the file.');
 
-  // Initiate the video download
-  const writer = fs.createWriteStream(filePath);
-  const response = await axios.get(videoUrl, { responseType: 'stream' });
+  // // Initiate the video download
+  // const writer = fs.createWriteStream(filePath);
+  // const response = await axios.get(videoUrl, { responseType: 'stream' });
 
-  // Stream the video content to the file on the server
-  await pipelineAsync(response.data, writer);
+  // // Stream the video content to the file on the server
+  // await pipelineAsync(response.data, writer);
 
-  console.log(`Downloaded: ${fileName}`);
+  // console.log(`Downloaded: ${fileName}`);
+  res.send("this is my life, Program development is the best thing i can do for ever")
 
   });
   

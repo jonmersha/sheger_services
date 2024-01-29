@@ -5,6 +5,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use('/static', express.static('public'))
+
 app.get('/test',(req,res)=>{
   res.send("New Server")
 })
