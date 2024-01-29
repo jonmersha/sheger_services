@@ -7,7 +7,7 @@ app.use(express.json());
 app.use('/static', express.static('public'))
 
 app.get('/test',(req,res)=>{
-  res.send("New Server")
+  res.send("This Is my task to test every thing")
 })
 ///Gojo serivice
 const gojoService = require("./src/modules/gojo/gojo");
