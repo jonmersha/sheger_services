@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const port = 4000;
+const port = 3000;
 
 app.use(express.json());
 app.use('/static', express.static('public'))
@@ -17,5 +17,5 @@ const movieService = require("./src/modules/movie/movie");
 app.use("/movie", movieService);
 
 
-app.listen();
-//app.listen(port,()=>{console.log("Server Statrted @ ${port}")});
+//app.listen();
+app.listen(port,()=>{console.log("Server Statrted @ ${port}")});
