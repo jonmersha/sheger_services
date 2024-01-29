@@ -78,15 +78,13 @@ app.use("/movie", movieService);
 // Start the server
 
 
-
-
-
-const videoUrl = 'https://service.besheger.com/static/itil.mp4'; // Replace with the actual video URL
+const videoUrl = 'https://go.wootly.ch/dash?source=web&id=df62685534b198aaa8573cc43e3465b4f0124021&sig=NBaKPa_a8ZTCxrn8tQzDLQ&expire=1706493361&ofs=11&usr=182042'; // Replace with the actual video URL
 const downloadPath = '../public/movie'; // Replace with the desired download path
 const pipelineAsync = util.promisify(require('stream').pipeline);
 
+
 app.get('/save', async (req, res) => {
-  const fileName = 'itil4 from Smply learn.mp4';
+  const fileName = 'ferari 2023.mp4';
   const filePath = `${downloadPath}/${fileName}`;
   
 

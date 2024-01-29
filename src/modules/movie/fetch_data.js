@@ -5,8 +5,8 @@ const mysql = require('mysql');
 function fetchDataFromMySQL(query, callback) {
   const connection = mysql.createConnection({
     host: "localhost",
-    user: "hirasoftwarecom_audit",
-    database:"movie_service",
+    user: "beshegercom_db_service",
+    database:"beshegercom_movie_service",
     password: "Yohannes@hira123321"
 
   });
