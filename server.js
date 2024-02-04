@@ -17,8 +17,13 @@ app.use("/gojo", gojoService);
 const movieService = require("./src/modules/movie/movie");
 app.use("/movie", movieService);
 
+///shai bunna servic
+const shaiBunnaService = require("./src/modules/shaibunna/shai_bunna");
+app.use("/shai", shaiBunnaService);
+
+
 
 //Remote Service Configurations
-app.listen();
+//app.listen();
 //Loca service Configurations
-//app.listen(port,()=>{console.log("Server Statrted @ ${port}")});
+app.listen(port,()=>{console.log(`Server Statrted @ ${port}`)});
