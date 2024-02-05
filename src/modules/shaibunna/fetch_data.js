@@ -6,7 +6,7 @@ function fetchDataFromMySQL(query, callback) {
   const connection = mysql.createConnection({
     host: "localhost",
     user: "beshegercom_db_service",
-    database:"beshegercom_movie_service",
+    database:"beshegercom_shaibuna_servic",
     password: "Yohannes@hira123321"
 
   });
