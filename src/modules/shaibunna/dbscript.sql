@@ -20,7 +20,30 @@ create table product_cat(
     category_description varchar(2000)
 )
 create table services()
-create table service_order()
+create table service_order(
+    id int primary key auto_Increment,
+    order_id int,
+    product_id int,
+    product_price double,
+    order_date date,
+    isPaymentDone boolean,
+    isDelivered boolean,
+    delivery_status_history int,
+)
+create table shoping_cart(
+    
+)
+create table shiping(
+    id int primary key auto_Increment,
+    orderId int,
+    shipping_status varchar(),
+    current_location varchar(),
+    loc_latitude varchar(40),
+    loc_longitude varchar(40),
+    carrier_id int,
+    start_time date,
+    delivered_time int,
+)
 create table service_providers(
     int id primary key auto_Increment,
     full_name varchar(200),
@@ -37,11 +60,37 @@ create table service_provider_non_confirmity_report(
     report_date date
 
 )
-create table service_consumer_non_confirmity_report(
+create table non_compliance_type(
+    id int primary key auto_Increment,
+    non_compliance_name varchar(100) unique,
+    siverity_level varchar(100),
+    related_measures vachar(100),
+    length_of_disconnect varchar(100)
+);
+create table service_consumer_non_confirmity_report_by_provider(
+    id int primary key auto_Increment,
+    reporting_provider_id int,
+    consumer_id int,
+    non_complianc_type
+    report_description varchar(2000),
+    reporting_date date
     
 )
-create table service_deliverer_non_confirmity_report(
+create table service_deliverer_non_confirmity_report_consumer(
+     id int primary key auto_Increment,
+    reporting_consumer_id int,
+    provider_id int,
+    non_complianc_type
+    report_description varchar(2000),
+    reporting_date date
     
+)
+create table referal_program(
+    id int primary key auto_Increment,
+    referal_key varchar(100),
+    referal_date varchar(100)
+    refered_by varchar(100)
+    referStatus varchar(100)
 )
 create table service_providers(
     id int primary key auto_Increment,
@@ -120,4 +169,43 @@ create table providers_service(
     available_amount int,
     tresh_hold_amount int
 );
+
+-- Payment methods used to pay for the ordered product should be govrened 
+-- during order time and the users can choos among the playment methods 
+create table payment_setting(
+    id int primary key auto_Increment,
+    user_id int,
+    source_account varchar(100) unique,
+    payment_accou 
+    account_verified boolean,
+    date_created date
+
+)
+
+create table offilines_payment_confirmation(
+
+)
+-- payment infomations for products are ready from the hira system and the amount should be payed from the banks mobile app
+-- the system should expose the amount from 
+
+--the other options is paying the using Code form any applications 
+-- and the pyament infomations shuld be sent to the system from the bank and 
+-- the informations abou the payemnts should be acisisble form banks sytem  
+
+create table payment_local_banks(
+    id int primary key auto_Increment,
+    order_number int,
+    payment_status boolean,
+    payment_transaction_number varchar(400), 
+);
+create table financial_institutions(
+    id int primary key auto_Increment,
+    org_name varchar(100),
+    logo_path varchar(100)
+)
+
+==========================Additional database Storage for============
+-- table for adevertisment
+-- Table for Reward
+
 

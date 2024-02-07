@@ -18,7 +18,7 @@ router.get('/consumers/get', async (req, res) => {
     
   });
 
-  router.get('/consumers/add', async (req, res) => {
+  router.post('/consumers/add', async (req, res) => {
     let stm=insertOP.insert('consumers',req.body)
     callFunc.addDataCallBack(stm,res,);
   });
