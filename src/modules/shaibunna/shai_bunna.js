@@ -1,4 +1,5 @@
 const express = require('express');
+var requestIp = require('request-ip');
 //const app = express();
 const router = express.Router();
 
@@ -8,8 +9,15 @@ const selectOP=require('../../utils/select')
 const updateOP=require('../../utils/update')
 const deleteOP=require('../../utils/delete')
 
+
 //Call Back Functions
 const callFunc=require('./call_backs')
+
+router.get('/ip',(req,res)=>{
+  var clientIp = requestIp.getClientIp(req);
+  res.send(`${clientIp.substring(7)}`)
+
+})
 //Consumer
   //===================================Consumers Oprations==========
 router.get('/consumers/get', async (req, res) => {
