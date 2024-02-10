@@ -15,7 +15,7 @@ const callFunc=require('./call_backs')
 
 router.get('/ip',(req,res)=>{
   var clientIp = requestIp.getClientIp(req);
-  res.send(`${clientIp.substring(7)}`)
+  res.send(`${clientIp}`)
 
 })
 //Consumer
