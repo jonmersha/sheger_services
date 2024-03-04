@@ -81,7 +81,9 @@ season_ int
 );
 
 insert into movies(movie_title,movie_desc,movie_path) values('Found','Pilot','/movie/video/Found/Found S1, E1 - Pilot.mp4');
+
 insert into movies(movie_title,movie_desc,movie_path) values('Found','Missing While Sinning','/movie/video/Found/Found S1, E2 - Missing While Sinning');
+
 insert into movies(movie_title,movie_desc,movie_path) values('Found','Missing While Widowed','/movie/video/Found/Found S1, E3 - Missing While Widowed');
 insert into movies(movie_title,movie_desc,movie_path) values('Found','Missing While a Pawn','/movie/video/Found/Found S1, E4 - Missing While a Pawn.mp4');
 insert into movies(movie_title,movie_desc,movie_path) values('Found','Missing While Undocumented','/movie/video/Found/Found S1, E5 - Missing While Undocumented.mp4');
