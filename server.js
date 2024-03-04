@@ -6,6 +6,9 @@ const port = 3000;
 app.use(express.json());
 app.use('/static', express.static('public'))
 
+app.use('/movie', express.static('public/movie'))
+
+
 app.get('/test',(req,res)=>{
   res.send("This Is my task to test every thing again testing continued on the activityy")
 })

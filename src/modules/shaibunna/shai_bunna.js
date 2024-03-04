@@ -19,7 +19,7 @@ router.get('/ip',(req,res)=>{
 
 })
 //Consumer
-  //===================================Consumers Oprations==========
+  //===================================Consumers Operations==========
 router.get('/consumers/get', async (req, res) => {
     const stm=selectOP.selectAll("consumers");
     callFunc.addDataCallBack(stm,res,'consumers');

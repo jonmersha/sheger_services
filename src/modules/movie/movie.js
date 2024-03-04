@@ -11,7 +11,7 @@ const deleteOP=require('../../utils/delete')
 //Call Back Functions
 const callFunc=require('./call_backs')
 
-router.get('/service/get', async (req, res) => {
+router.get('/get', async (req, res) => {
     const stm=selectOP.selectAll("movies");
    callFunc.addDataCallBack(stm,res);
   });
