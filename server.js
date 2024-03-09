@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
+var cors = require('cors')
 
 const port = 3000;
-
+app.use(cors())
 app.use(express.json());
 app.use("/static", express.static("public"));
-
 app.use("/movie", express.static("public/movie"));
 
 app.get("/test", (req, res) => {
@@ -26,8 +26,8 @@ const shaiBunnaService = require("./src/modules/shaibunna/shai_bunna");
 app.use("/shaibuna", shaiBunnaService);
 
 //Remote Service Configurations
-app.listen();
-//Loca service Configurations
+ app.listen();
+// Loca service Configurations
 // app.listen(port, () => {
 //   console.log(`Server Statrted @ ${port}`);
 // });
