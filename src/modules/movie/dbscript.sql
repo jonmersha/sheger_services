@@ -52,7 +52,7 @@ create table movies(
 
 create table movies(
 ID int primary key auto_Increment,
-titile varchar(100),
+title varchar(100),
 movie_description varchar(500),
 view_number int,
 likes_number int,
@@ -96,20 +96,14 @@ insert into movies(movie_title,movie_desc,movie_path) values('Found','Missing Wh
 INSERT INTO movies(
 titile,
 movie_description,
-view_number,
-likes_number,
-rating,
 image_url,
 video_url,
 is_series)
 VALUES(
-	'Tewilign Amharic Movies',
-    'Tewilign Amharic Movies are romantic movies ',
-    1000,
-    20,
-    5,
-    'http://192.168.0.3:3000/movie/image/tewilign.png',
-    'https://go.wootly.ch/dash?source=web&id=d2b8ac5ed84dc6ab92b5db460575dc157ed41b4a&sig=HbFOr6udHRLkNmW_5o7v-w&expire=1709470714&ofs=11&usr=180566',
+	'Flutter Video Call',
+    'Flutter Video Call Application Using Agora API',
+    '/movie/image/collection/call.jpeg',
+    '/movie/video/flutter/flutter.mp4',
     false
 );
 
