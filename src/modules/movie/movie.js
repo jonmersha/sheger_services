@@ -22,7 +22,7 @@ router.get("/series/get", async (req, res) => {
   callFunc.addDataCallBack(stm, res);
 });
 
-router.get("/series/:id", async (req, res) => {
+router.get("/sub/:id", async (req, res) => {
   const id=req.params.id;
   const stm = selectOP.selectCTR("series",id,"Parent_ID");
   callFunc.addDataCallBack(stm, res);
