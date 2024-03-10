@@ -2,4 +2,9 @@ function selectAll(tableName){
     return `SELECT * FROM ${tableName}`;
 
 }
-module.exports={selectAll}
+
+function selectCTR(tableName,id,KEY){
+    return `SELECT * FROM ${tableName} where ${KEY}=${id}`;
+
+}
+module.exports={selectAll,selectCTR}

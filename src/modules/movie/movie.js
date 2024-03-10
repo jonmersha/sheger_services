@@ -15,10 +15,21 @@ router.get("/get", async (req, res) => {
   const stm = selectOP.selectAll("movies");
   callFunc.addDataCallBack(stm, res);
 });
+
+
 router.get("/series/get", async (req, res) => {
   const stm = selectOP.selectAll("series");
   callFunc.addDataCallBack(stm, res);
 });
+
+router.get("/series/:id", async (req, res) => {
+  const id=req.params.id;
+  const stm = selectOP.selectCTR("series",id,"Parent_ID");
+  callFunc.addDataCallBack(stm, res);
+});
+
+
+
 
 router.get("/save", (req, res) => {
   res.send(
