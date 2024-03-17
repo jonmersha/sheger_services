@@ -15,6 +15,8 @@ router.get("/get", async (req, res) => {
   const stm = selectOP.selectAll("movies");
   callFunc.addDataCallBack(stm, res);
 });
+
+
 router.get("/series/get", async (req, res) => {
   const stm = selectOP.selectAll("series");
   callFunc.addDataCallBack(stm, res);
@@ -26,16 +28,13 @@ router.get("/sub/:id", async (req, res) => {
   callFunc.addDataCallBack(stm, res);
 });
 
-
-
-
 router.get("/save", (req, res) => {
   res.send(
     "this is my life, Program development is the best thing i can do for ever"
   );
 });
 router.post("/add", (req, res) => {
-  let stm = insertOP.insert("movie", req.body);
+  let stm = insertOP.insert("movies", req.body);
   callFunc.addDataCallBack(stm, res);
 });
 
