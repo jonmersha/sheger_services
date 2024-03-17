@@ -15,8 +15,6 @@ router.get("/get", async (req, res) => {
   const stm = selectOP.selectAll("movies");
   callFunc.addDataCallBack(stm, res);
 });
-
-
 router.get("/series/get", async (req, res) => {
   const stm = selectOP.selectAll("series");
   callFunc.addDataCallBack(stm, res);

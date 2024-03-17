@@ -18,6 +18,11 @@ const gojoService = require("./src/modules/gojo/gojo");
 app.use("/gojo", gojoService);
 
 ///movie Service serivice
+const kids = require("./src/modules/kids/kids");
+app.use("/kids", kids);
+
+
+///movie Service serivice
 const movieService = require("./src/modules/movie/movie");
 app.use("/movie", movieService);
 
