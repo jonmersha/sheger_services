@@ -113,10 +113,19 @@ router.get("/users/:id", async (req, res) => {
     const stm = selectOP.selectAll("play_list");
     callFunc.addDataCallBack(stm, res);
   });
+
+
   //by id
   router.get("/play_list/:id", async (req, res) => {
     const id=req.params.id;
   const stm = selectOP.selectCTR("play_list",id,"id");
+  callFunc.addDataCallBack(stm, res);
+  });
+  //play_list
+  router.get("/play_list_video/:id", async (req, res) => {
+
+    const id=req.params.id;
+  const stm = selectOP.selectCTR("play_list_video",id,"id");
   callFunc.addDataCallBack(stm, res);
   });
   //video_group
@@ -130,7 +139,6 @@ router.get("/users/:id", async (req, res) => {
   const stm = selectOP.selectCTR("video_group",id,"id");
   callFunc.addDataCallBack(stm, res);
   });
-
 
 
 //==========================Post Section============
@@ -170,6 +178,13 @@ router.post("/video/add", (req, res) => {
     let stm = insertOP.insert("play_list", req.body);
     callFunc.addDataCallBack(stm, res);
   });
+
+  //play_list
+  router.post("/play_list_video/add", (req, res) => {
+    let stm = insertOP.insert("play_list_video", req.body);
+    callFunc.addDataCallBack(stm, res);
+  });
+
   //video_group
   router.post("/video_group/add", (req, res) => {
     let stm = insertOP.insert("video_group", req.body);
@@ -177,34 +192,31 @@ router.post("/video/add", (req, res) => {
   });
 
 
+// router.get("/series/get", async (req, res) => {
+//   const stm = selectOP.selectAll("series");
+//   callFunc.addDataCallBack(stm, res);
+// });
 
-router.get("/series/get", async (req, res) => {
-  const stm = selectOP.selectAll("series");
-  callFunc.addDataCallBack(stm, res);
-});
-
-router.get("/sub/:id", async (req, res) => {
-  const id=req.params.id;
-  const stm = selectOP.selectCTR("series",id,"Parent_ID");
-  callFunc.addDataCallBack(stm, res);
-});
-
+// router.get("/sub/:id", async (req, res) => {
+//   const id=req.params.id;
+//   const stm = selectOP.selectCTR("series",id,"Parent_ID");
+//   callFunc.addDataCallBack(stm, res);
+// });
 
 
 
-router.get("/save", (req, res) => {
-  res.send(
-    "this is my life, Program development is the best thing i can do for ever"
-  );
-});
-router.post("/add", (req, res) => {
-  let stm = insertOP.insert("movie", req.body);
-  callFunc.addDataCallBack(stm, res);
-});
 
-router.post("/series/add", (req, res) => {
-  let stm = insertOP.insert("series", req.body);
-  callFunc.addDataCallBack(stm, res);
-});
+// router.post("/add", (req, res) => {
+//   let stm = insertOP.insert("movie", req.body);
+//   callFunc.addDataCallBack(stm, res);
+// });
+
+// router.post("/series/add", (req, res) => {
+//   let stm = insertOP.insert("series", req.body);
+//   callFunc.addDataCallBack(stm, res);
+// });
+
+
+
 
 module.exports = router;

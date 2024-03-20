@@ -60,10 +60,14 @@ create table channel_subscription(
 create table play_list(
 	id int primary key auto_increment,
     play_list_name varchar(200),
-    user_id int,
+    user_id int
+);
+create table play_list_video(
+	id int primary key auto_increment,
+    play_list_id varchar(200),
     video_id int,
-    channel_id int
-	
+    channel_id int,
+    unique(play_list_id,video_id)
 );
 create table video_group(
 	id int primary key auto_increment,

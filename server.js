@@ -32,7 +32,7 @@ app.use("/shaibuna", shaiBunnaService);
 
 //Remote Service Configurations
  app.listen();
-// Loca service Configurations
+//Loca service Configurations
 // app.listen(port, () => {
 //   console.log(`Server Statrted @ ${port}`);
 // });
