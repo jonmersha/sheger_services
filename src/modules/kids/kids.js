@@ -47,6 +47,14 @@ router.get("/video/uploader/:id", async (req, res) => {
   const stm = selectOP.selectCTR("videos",id,"video_uploder");
   callFunc.addDataCallBack(stm, res);
 });
+//by video Group
+router.get("/video/group/:id", async (req, res) => {
+  const id=req.params.id;
+  const stm = selectOP.selectCTR("videos",id,"video_Category");
+  callFunc.addDataCallBack(stm, res);
+});
+
+//======================================
 //uploader
 router.get("/uploader", async (req, res) => {
   const stm = selectOP.selectAll("uploader");
