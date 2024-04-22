@@ -1,43 +1,87 @@
-create db gojo_service
-CREATE TABLE SERVICE_PROVIDER(
-	providerId int,
-    serviceId int,
-    productImagePath varchar(2000),
-    serviceDescription varchar(1000),
-    detailedDescription varchar(5000),
-    areasUnderCoverage varchar(5000),
-    meanseOfDelivery varchar(200),
-    unitPrice double,
-    primary key(providerId,serviceId)
+CREATE TABLE P_LOCATION(
+ ID INT PRIMARY KEY auto_increment,
+    DEVCIE_ID INT,
+ LOCATIONS_NAME VARCHAR(200),
+ LATITUDE VARCHAR(100),
+ LOBGITUDE VARCHAR(100)
+);
+CREATE TABLE PRICE_BY_CAR(
+ ID INT PRIMARY KEY auto_increment,
+    LOC_ID INT,
+    CAR_TYPE INT,
+    LENG_OF_TIME_MAX int,
+    PRICE DOUBLE
 );
 
-CREATE TABLE USER_PROFILE(
-	userId INT AUTO_INCREMENT PRIMARY KEY,
-    userCode varchar(200) unique,
-    fullName varchar(200),
-    gender varchar(3),
-    country varchar(30),
-    ciry varchar(40),
-    serviGeolocation varchar(70),
-    emailId varchar(100) unique,
-    mobileNumber varchar(20) unique
-    );
-CREATE TABLE USER_SERVICE_INTERATION 
+alter table PRICE_BY_CAR 
+add constraint fk_location_to_price 
+foreign key (LOC_ID)
+references P_LOCATION(ID);
 
-
-CREATE TABLE SERVICE(
-serviceId int AUTO_INCREMENT primary key,
-serviceName varchar(200),
-servieDescriprion varchar(500)
+CREATE TABLE CAP_BY_CAR_SIZE(
+    LOC_ID INT,
+    SIZE_ID INT,
+    CAPACITY INT
 );
 
-CREATE TABLE SERVICE_ORDER(
-	orderId int auto_Increment primary key,
+alter table CAP_BY_CAR_SIZE 
+add constraint fk_location_to_side 
+foreign key (LOC_ID)
+references P_LOCATION(ID);
+
+alter table CAP_BY_CAR_SIZE 
+add constraint fk_size_to_car_size_to_size 
+foreign key (SIZE_ID)
+references CAR_SIZE(ID);
+
+-- drop table CAR_SIZE;
+
+CREATE TABLE CAR_SIZE(
+ID INT primary key auto_increment,
+SIZE_DESC varchar(100),
+LENGHTH DOUBLE,
+WIDTH DOUBLE
 );
 
+-- drop table PARKED;
 
-CREATE TABLE SERVICE_TYPE();
-CREATE TABLE PRODUCT_LINE();
+CREATE TABLE PARKED(
+ ID INT primary key auto_increment,
+    PARKING_ID int,
+    DRIVER_ID INT,
+    START_TIME datetime,
+    END_TIME datetime,
+    AMOUNT_DUE DOUBLE
+);
 
+create table DRIVER(
+ID int  primary key auto_increment,
+DeviceId varchar(100),
+full_name varchar(150)
+);
 
-insert into SERVICE(serviceName,servieDescriprion) values('yebanitina witetoch','Prepartions of Food ingreadint')
+create table DRIVER_CAR(
+ID int primary key auto_increment,
+driver_id int,
+car_id int
+);
+
+alter table PARKED 
+add constraint fk_location_parked
+foreign key (PARKING_ID)
+references P_LOCATION(ID);
+
+alter table PARKED 
+add constraint fk_drver_parked
+foreign key (DRIVER_ID)
+references DRIVER(ID);
+
+alter table DRIVER_CAR 
+add constraint fk_driver_car
+foreign key (driver_id)
+references DRIVER(ID);
+
+alter table DRIVER_CAR 
+add constraint fk_driver_car_SIZE
+foreign key (car_id)
+references CAR_SIZE(ID);
