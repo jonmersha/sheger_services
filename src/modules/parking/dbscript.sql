@@ -86,7 +86,7 @@ add constraint fk_driver_car_SIZE
 foreign key (car_id)
 references CAR_SIZE(ID);
 
-
+========================================================================
 -- Create Users table
 CREATE TABLE Users (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
@@ -129,6 +129,13 @@ CREATE TABLE Reviews (
     FOREIGN KEY (ParkingLocationID) REFERENCES ParkingLocation(LocationID)
 );
 
+-- Insert sample data into Reviews table
+INSERT INTO Reviews (UserID, ParkingLocationID, Rating, Comment)
+VALUES 
+    (1, 1, 4.5, 'Great parking garage, convenient location and reasonable price.'),
+    (2, 2, 4.0, 'Decent street parking, but can be difficult to find a spot during peak hours.'),
+    (3, 3, 4.2, 'Spacious suburban parking lot with good accessibility and ample parking space.');
+
 -- Create Reservations table
 CREATE TABLE Reservations (
     ReservationID INT PRIMARY KEY AUTO_INCREMENT,
@@ -148,3 +155,25 @@ CREATE TABLE UserCars (
     CarType VARCHAR(50) NOT NULL,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+-- Create Pricing table
+CREATE TABLE Pricing (
+    PricingID INT PRIMARY KEY AUTO_INCREMENT,
+    CarSize VARCHAR(50) NOT NULL,
+    MaxTimeInHours INT NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    ParkingLocationID INT,
+    FOREIGN KEY (ParkingLocationID) REFERENCES ParkingLocation(LocationID)
+);
+
+-- Insert sample data into Pricing table
+INSERT INTO Pricing (CarSize, MaxTimeInHours, Price, ParkingLocationID)
+VALUES 
+    ('Compact', 2, 5.00, 1),
+    ('Compact', 4, 8.00, 1),
+    ('Sedan', 3, 6.00, 1),
+    ('Sedan', 6, 10.00, 1),
+    ('SUV', 2, 7.00, 2),
+    ('SUV', 4, 11.00, 2),
+    ('Large', 3, 9.00, 3),
+    ('Large', 6, 15.00, 3);

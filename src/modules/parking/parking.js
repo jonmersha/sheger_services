@@ -10,14 +10,14 @@ const deleteOP = require("../../utils/delete");
 //Call Back Functions
 const callFunc = require("./call_backs");
 
-// location infomation
+// Parking locations
 router.get("/location/get", (req, res) => {
-  const stm = selectOP.selectAll("P_LOCATION");
+  const stm = selectOP.selectAll("ParkingLocation");
   callFunc.addDataCallBack(stm, res);
 });
 
 router.post("/location/add", (req, res) => {
-  let stm = insertOP.insert("P_LOCATION", req.body);
+  let stm = insertOP.insert("ParkingLocation", req.body);
   callFunc.addDataCallBack(stm, res);
 });
 
@@ -78,12 +78,12 @@ router.post("/driver/add", (req, res) => {
 
 //--PRICE_BY_CAR
 router.get("/price/get", (req, res) => {
-  const stm = selectOP.selectAll("PRICE_BY_CAR");
+  const stm = selectOP.selectAll("Pricing");
   callFunc.addDataCallBack(stm, res);
 });
 
 router.post("/price/add", (req, res) => {
-  let stm = insertOP.insert("PRICE_BY_CAR", req.body);
+  let stm = insertOP.insert("Pricing", req.body);
   callFunc.addDataCallBack(stm, res);
 });
 
