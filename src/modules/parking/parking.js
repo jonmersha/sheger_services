@@ -1,8 +1,7 @@
 const express = require("express");
-//const app = express();
 const router = express.Router();
 
-//Crud Opearions
+//Crud Opearions files
 const insertOP = require("../../utils/insert");
 const selectOP = require("../../utils/select");
 const updateOP = require("../../utils/update");
@@ -74,6 +73,17 @@ router.get("/driver/get", (req, res) => {
 
 router.post("/driver/add", (req, res) => {
   let stm = insertOP.insert("DRIVER", req.body);
+  callFunc.addDataCallBack(stm, res);
+});
+
+//--PRICE_BY_CAR
+router.get("/price/get", (req, res) => {
+  const stm = selectOP.selectAll("PRICE_BY_CAR");
+  callFunc.addDataCallBack(stm, res);
+});
+
+router.post("/price/add", (req, res) => {
+  let stm = insertOP.insert("PRICE_BY_CAR", req.body);
   callFunc.addDataCallBack(stm, res);
 });
 

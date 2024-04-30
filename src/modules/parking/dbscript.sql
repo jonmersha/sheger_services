@@ -85,3 +85,66 @@ alter table DRIVER_CAR
 add constraint fk_driver_car_SIZE
 foreign key (car_id)
 references CAR_SIZE(ID);
+
+
+-- Create Users table
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Username VARCHAR(50) NOT NULL,
+    Email VARCHAR(100) NOT NULL,
+    Password VARCHAR(100) NOT NULL,
+    -- Add other user fields as needed
+    UNIQUE(Email)
+);
+
+-- Create ParkingLocation table
+CREATE TABLE ParkingLocation (
+    LocationID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100) NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Latitude DECIMAL(10, 8) NOT NULL,
+    Longitude DECIMAL(11, 8) NOT NULL,
+    Type VARCHAR(50) NOT NULL,
+    Capacity INT NOT NULL,
+    Availability INT NOT NULL,
+    Price DECIMAL(10, 2) NOT NULL,
+    Rating DECIMAL(3, 2),
+    Accessibility VARCHAR(100),
+    OwnerID INT,
+    CompactCapacity INT DEFAULT 0,
+    SedanCapacity INT DEFAULT 0,
+    SUVCapacity INT DEFAULT 0,
+    LargeCarCapacity INT DEFAULT 0,
+    FOREIGN KEY (OwnerID) REFERENCES Users(UserID)
+);
+
+-- Create Reviews table
+CREATE TABLE Reviews (
+    ReviewID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    ParkingLocationID INT,
+    Rating DECIMAL(3, 2) NOT NULL,
+    Comment TEXT,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (ParkingLocationID) REFERENCES ParkingLocation(LocationID)
+);
+
+-- Create Reservations table
+CREATE TABLE Reservations (
+    ReservationID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    ParkingLocationID INT,
+    StartTime DATETIME NOT NULL,
+    EndTime DATETIME NOT NULL,
+    Status VARCHAR(20) NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID),
+    FOREIGN KEY (ParkingLocationID) REFERENCES ParkingLocation(LocationID)
+);
+
+-- Create UserCars table
+CREATE TABLE UserCars (
+    UserCarID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    CarType VARCHAR(50) NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
