@@ -13,6 +13,14 @@ app.get("/test", (req, res) => {
     "This Is my task to test every thing again testing continued on the activityy"
   );
 });
+///Shoping Services serivice
+//============================================
+const shoping_get = require("./src/modules/shop/get");
+app.use("/shoping", shoping_get);
+
+const shoping_post = require("./src/modules/shop/post");
+app.use("/shoping", shoping_post);
+//==================================================
 
 ///parking serivice
 const parkingService = require("./src/modules/parking/parking");
@@ -36,7 +44,7 @@ app.use("/shaibuna", shaiBunnaService);
 
 //Remote Service Configurations
 //app.listen();
-//Loca service Configurations
+//Local service Configurations
 app.listen(port, () => {
   console.log(`Server Statrted @ ${port}`);
 });
