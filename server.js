@@ -16,10 +16,10 @@ app.get("/test", (req, res) => {
 ///Shoping Services serivice
 //============================================
 const shoping_get = require("./src/modules/shop/get");
-app.use("/shoping", shoping_get);
+app.use("/shopping", shoping_get);
 
 const shoping_post = require("./src/modules/shop/post");
-app.use("/shoping", shoping_post);
+app.use("/shopping", shoping_post);
 //==================================================
 
 ///parking serivice

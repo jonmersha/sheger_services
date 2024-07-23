@@ -14,48 +14,42 @@ const callFunc=require('./call_backs')
 
 
 
-
-router.post('/user/get', (req, res) => {
+//1-->User Registrations
+router.post('/user/add', (req, res) => {
     const stm=selectOP.selectAll("users");
    callFunc.addDataCallBack(stm,res);
   });
-
-
-  router.post('/category/get', (req, res) => {
-    const stm=selectOP.selectAll("category");
-   callFunc.addDataCallBack(stm,res);
+//2-->product category Registrations
+  router.post('/category/add', (req, res) => {
+    let stm=insertOP.insert('category',req.body)
+    callFunc.addDataCallBack(stm,res,'ServiceCenter');
   });
 
-
-  router.post('/product/get', (req, res) => {
-    const stm=selectOP.selectAll("product");
-   callFunc.addDataCallBack(stm,res);
+//-->Product Registrations
+  router.post('/product/add', (req, res) => {
+   let stm=insertOP.insert('product',req.body)
+   callFunc.addDataCallBack(stm,res,'ServiceCenter');
   });
 
-  router.post('/stock/get', (req, res) => {
-    const stm=selectOP.selectAll("stock_bin");
-   callFunc.addDataCallBack(stm,res);
+  router.post('/stock/add', (req, res) => {
+   let stm=insertOP.insert('stock_bin',req.body)
+   callFunc.addDataCallBack(stm,res,'ServiceCenter');
   });
 
-  router.post('/store/get', (req, res) => {
-    const stm=selectOP.selectAll("merchant_store");
-   callFunc.addDataCallBack(stm,res);
+  router.post('/store/add', (req, res) => {
+   let stm=insertOP.insert('merchant_store',req.body)
+   callFunc.addDataCallBack(stm,res,'ServiceCenter');
+
   });
 
-  router.post('/order/get', (req, res) => {
-    const stm=selectOP.selectAll("product_order");
-   callFunc.addDataCallBack(stm,res);
+  router.post('/order/add', (req, res) => {
+   let stm=insertOP.insert('product_order',req.body)
+   callFunc.addDataCallBack(stm,res,'ServiceCenter');
   });
-
-  router.post('/sells/get', (req, res) => {
-    const stm=selectOP.selectAll("product_selles");
-   callFunc.addDataCallBack(stm,res);
+  router.post('/sells/add', (req, res) => {
+   let stm=insertOP.insert('product_selles',req.body)
+   callFunc.addDataCallBack(stm,res,'ServiceCenter');
   });
-
-
-
-
-  
 router.post('/user/add', (req, res) => {
    let stm=insertOP.insert('users',req.body)
     callFunc.addDataCallBack(stm,res);
