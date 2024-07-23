@@ -13,7 +13,7 @@ app.get("/test", (req, res) => {
     "This Is my task to test every thing again testing continued on the activityy"
   );
 });
-///Shoping Services serivice
+///Shoping Services serivice is chaged well
 //============================================
 const shoping_get = require("./src/modules/shop/get");
 app.use("/shopping", shoping_get);
