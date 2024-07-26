@@ -14,7 +14,7 @@ const callFunc=require('./call_backs')
 
 //Simple Response
 //1
-router.get('/user/get', (req, res) => {
+router.get('/category/get', (req, res) => {
     const stm=selectOP.selectAll("users");
    callFunc.addDataCallBack(stm,res);
   });

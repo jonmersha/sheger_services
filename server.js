@@ -15,6 +15,14 @@ app.get("/test", (req, res) => {
     "This Is my task to test every thing again testing continued on the activityy"
   );
 });
+///Aduit System Services serivice is chaged well
+//============================================
+const ams_get = require("./src/modules/audit/get");
+app.use("/ams", ams_get);
+
+const ams_post = require("./src/modules/audit/post");
+app.use("/ams", ams_post);
+
 ///Shoping Services serivice is chaged well
 //============================================
 const shoping_get = require("./src/modules/shop/get");
@@ -45,8 +53,8 @@ const shaiBunnaService = require("./src/modules/shaibunna/shai_bunna");
 app.use("/shaibuna", shaiBunnaService);
 
 //Remote Service Configurations
-app.listen();
+//app.listen();
 //Local service Configurations
-// app.listen(port, () => {
-//   console.log(`Server Statrted @ ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server Statrted @ ${port}`);
+});
