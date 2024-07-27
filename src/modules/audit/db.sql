@@ -322,7 +322,7 @@ CREATE TABLE `area` (
   `category` int DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
 CREATE TABLE `auditor` (
   `id` int NOT NULL,
@@ -330,40 +330,27 @@ CREATE TABLE `auditor` (
   `team` int DEFAULT NULL,
   `status` tinyint(1) DEFAULT NULL,
   `jobGrade` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ;
 
 CREATE TABLE `audit_test` (
   `checklist` int NOT NULL,
   `planId` int DEFAULT NULL,
   `result` varchar(100) DEFAULT NULL,
   `descriptions` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `category`
---
+) ;
 
 CREATE TABLE `category` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
---
--- Dumping data for table `category`
---
 
 INSERT INTO `category` (`id`, `name`, `description`) VALUES
 (1, 'IT Audit', 'Auditing information technology and systems in the bank');
 
 -- --------------------------------------------------------
 
---
--- Table structure for table `check_list`
---
 
 CREATE TABLE `check_list` (
   `id` int NOT NULL,
@@ -372,13 +359,8 @@ CREATE TABLE `check_list` (
   `test_methods` varchar(100) DEFAULT NULL,
   `risk` int DEFAULT NULL,
   `criteria` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `criteria`
---
 
 CREATE TABLE `criteria` (
   `id` int NOT NULL,
@@ -386,9 +368,7 @@ CREATE TABLE `criteria` (
   `descriptions` varchar(500) DEFAULT NULL,
   `doc` int DEFAULT NULL,
   `docpath` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
+) ;
 
 CREATE TABLE `documents` (
   `id` int NOT NULL,
@@ -397,8 +377,7 @@ CREATE TABLE `documents` (
   `docType` varchar(100) DEFAULT NULL,
   `doc_vertion` varchar(100) DEFAULT NULL,
   `doc_path` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ;
 
 CREATE TABLE `engagement` (
   `planID` int NOT NULL,
@@ -407,14 +386,7 @@ CREATE TABLE `engagement` (
   `endDate` date DEFAULT NULL,
   `auditees` int DEFAULT NULL,
   `status` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `engagement_expense`
---
-
+) ;
 CREATE TABLE `engagement_expense` (
   `id` int NOT NULL,
   `engagementId` int DEFAULT NULL,
@@ -422,50 +394,25 @@ CREATE TABLE `engagement_expense` (
   `amount` double DEFAULT NULL,
   `quantitnty` int DEFAULT NULL,
   `total` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `engagement_obj`
---
-
+);
 CREATE TABLE `engagement_obj` (
   `id` int NOT NULL,
   `planId` int DEFAULT NULL,
   `engagementId` int DEFAULT NULL,
   `obective` varchar(400) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `expense_type`
---
+) ;
 
 CREATE TABLE `expense_type` (
   `id` int NOT NULL,
   `expenseName` varchar(100) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `factor`
---
+) ;
 
 CREATE TABLE `factor` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `category` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `finding`
---
+) ;
 
 CREATE TABLE `finding` (
   `id` int NOT NULL,
@@ -478,36 +425,18 @@ CREATE TABLE `finding` (
   `response` varchar(100) DEFAULT NULL,
   `evidence` varchar(100) DEFAULT NULL,
   `rectifications_status` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jobgrade`
---
+) ;
 
 CREATE TABLE `jobgrade` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `memebers`
---
+) ;
 
 CREATE TABLE `memebers` (
   `planId` int NOT NULL,
   `auditor` int NOT NULL,
   `designation` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `object`
---
+) ;
 
 CREATE TABLE `object` (
   `id` int NOT NULL,
@@ -516,20 +445,11 @@ CREATE TABLE `object` (
   `description` varchar(500) DEFAULT NULL,
   `create_time` timestamp NULL DEFAULT NULL,
   `creator` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `object`
---
+) ;
 
 INSERT INTO `object` (`id`, `name`, `category`, `description`, `create_time`, `creator`) VALUES
 (2, 'IT Strategy', 1, 'Auditing the IT strategy and related policy', NULL, NULL);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `plan`
---
 
 CREATE TABLE `plan` (
   `id` int NOT NULL,
@@ -539,26 +459,14 @@ CREATE TABLE `plan` (
   `status` int DEFAULT NULL,
   `score` double DEFAULT NULL,
   `risk_leve` varchar(5) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `program`
---
+) ;
 
 CREATE TABLE `program` (
   `planId` int NOT NULL,
   `engagementId` int DEFAULT NULL,
   `preveHostory` varchar(500) DEFAULT NULL,
   `auditMethodology` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `risk_grade`
---
+) ;
 
 CREATE TABLE `risk_grade` (
   `plan_id` int NOT NULL,
@@ -566,26 +474,14 @@ CREATE TABLE `risk_grade` (
   `likley_hood` int DEFAULT NULL,
   `impact` int DEFAULT NULL,
   `weight` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `risk_register`
---
+) ;
 
 CREATE TABLE `risk_register` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `description` varchar(100) DEFAULT NULL,
   `risk_category` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `schedule`
---
+) ;
 
 CREATE TABLE `schedule` (
   `planId` int NOT NULL,
@@ -593,35 +489,17 @@ CREATE TABLE `schedule` (
   `quarter` int DEFAULT NULL,
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `status`
---
+) ;
 
 CREATE TABLE `status` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `team`
---
+) ;
 
 CREATE TABLE `team` (
   `id` int NOT NULL,
   `name` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wbs`
---
+) ;
 
 CREATE TABLE `wbs` (
   `id` int NOT NULL,
@@ -630,28 +508,16 @@ CREATE TABLE `wbs` (
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `totalDate` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `year`
---
+) ;
 
 CREATE TABLE `year` (
   `id` int NOT NULL,
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
   `label` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ;
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `area`
---
 ALTER TABLE `area`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `auditable_area` (`object`,`category`,`name`),
