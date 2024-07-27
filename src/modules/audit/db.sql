@@ -315,34 +315,6 @@ create table users();
 ====================================
 ====================================
 ====================================
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: localhost
--- Generation Time: Jul 26, 2024 at 05:13 PM
--- Server version: 8.0.36-0ubuntu0.22.04.1
--- PHP Version: 8.1.2-1ubuntu2.17
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `beshegercom_ams`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `area`
---
 
 CREATE TABLE `area` (
   `id` int NOT NULL,
@@ -352,12 +324,6 @@ CREATE TABLE `area` (
   `description` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `auditor`
---
-
 CREATE TABLE `auditor` (
   `id` int NOT NULL,
   `fullName` varchar(100) DEFAULT NULL,
@@ -366,11 +332,6 @@ CREATE TABLE `auditor` (
   `jobGrade` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `audit_test`
---
 
 CREATE TABLE `audit_test` (
   `checklist` int NOT NULL,
@@ -427,11 +388,7 @@ CREATE TABLE `criteria` (
   `docpath` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- --------------------------------------------------------
 
---
--- Table structure for table `documents`
---
 
 CREATE TABLE `documents` (
   `id` int NOT NULL,
