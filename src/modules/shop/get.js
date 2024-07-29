@@ -26,9 +26,16 @@ let table=['category','merchant_store','product','product_order','stock_bin','us
 router.get("/data/:tableId", async (req, res) => {
   const ID=req.params.tableId;
   const stm = Query.all(table[ID]);
-
   callFunc.DBO(stm, res,'Error Getting Data!!');
 });
+
+router.get("/data/:tableId/:id", async (req, res) => {
+  const ID=req.params.tableId;
+  const merchantID=req.params.id;
+  const stm = Query.all_by_merchant(table[ID],merchantID);
+  callFunc.DBO(stm, res,'Error Getting Data!!');
+});
+
 
 
 //----Counting Records in the tables
