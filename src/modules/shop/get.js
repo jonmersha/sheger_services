@@ -11,6 +11,69 @@ const deleteOP=require('../../utils/delete')
 
 //Call Back Functions
 const callFunc=require('./call_backs')
+/**
+ * 0:'category',
+ * 1:'merchant_store',
+ * 2:'product',
+ * 5:'product_order',
+ * 4'stock_bin',
+ * 6:'users'
+ */
+let data=['category','merchant_store','product','product_order','stock_bin','users']
+//all record
+//--//--//Get all Data from tables
+router.get("/data/:id", async (req, res) => {
+  const id=req.params.id;
+  const stm = selectOP.selectAll(data[id]);
+  callFunc.getData(stm, res);
+});
+
+
+//--//--//Counting Records in the tables
+router.get("/count/:id", async (req, res) => {
+  const id=req.params.id;
+  const stm = selectOP.selectAllCount(data[id]);
+  callFunc.getData(stm, res);
+});
+
+router.get("/counts/:id/:recId", async (req, res) => {
+  var data = {
+    "counts": {
+        "id": req.params.id,
+        "color": req.params.recId
+    }}
+    res.send(data)
+
+  // const id=req.params.id;
+  // const stm = selectOP.selectAllCount(data[id]);
+  // callFunc.getData(stm, res);
+});
+
+// router.get("/search/:id/:recId", async (req, res) => {
+//   var data = {
+//     "counts": {
+//         "id": req.params.id,
+//         "color": req.params.recId
+//     }}
+//     res.send(data)
+
+//   // const id=req.params.id;
+//   // const stm = selectOP.selectAllCount(data[id]);
+//   // callFunc.getData(stm, res);
+// });
+
+router.get("/search/:tableId/:recId", async (req, res) => {
+  const tableId=req.params.tableId;
+  const recId=req.params.recId;
+  const stm = selectOP.selectCTR(data[tableId],recId,"id");
+  callFunc.addDataCallBack(stm, res);
+});
+
+
+
+
+
+
 
 //Simple Response
 //1
