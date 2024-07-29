@@ -1,5 +1,5 @@
 //=Select all contents from the table=======================
-function selectAll(tableName){
+function all(tableName){
     return `SELECT * FROM ${tableName}`;
 
 }
@@ -19,4 +19,4 @@ function selectCTRCount(tableName,id,KEY){
     return `SELECT Count(*) as count FROM ${tableName} where ${KEY}=${id}`;
 
 }
-module.exports={selectAll,selectCTR,selectAllCount,selectCTRCount}
+module.exports={all,selectCTR,selectAllCount,selectCTRCount}

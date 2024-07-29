@@ -5,7 +5,7 @@ const router = express.Router();
 
 //Crud Opearions 
 const insertOP=require('../../utils/insert')
-const selectOP=require('../../utils/select')
+const Query=require('../../utils/select')
 const updateOP=require('../../utils/update')
 const deleteOP=require('../../utils/delete')
 
@@ -19,29 +19,31 @@ const callFunc=require('./call_backs')
  * 4'stock_bin',
  * 6:'users'
  */
-let data=['category','merchant_store','product','product_order','stock_bin','users']
-//all record
-//--//--//Get all Data from tables
-router.get("/data/:id", async (req, res) => {
-  const id=req.params.id;
-  const stm = selectOP.selectAll(data[id]);
-  callFunc.getData(stm, res);
+let table=['category','merchant_store','product','product_order','stock_bin','users']
+
+
+//-----All Data Return
+router.get("/data/:tableId", async (req, res) => {
+  const ID=req.params.tableId;
+  const stm = Query.all(table[ID]);
+  
+  callFunc.DBO(stm, res,'Error Getting Data!!');
 });
 
 
-//--//--//Counting Records in the tables
+//----Counting Records in the tables
 router.get("/count/:id", async (req, res) => {
   const id=req.params.id;
-  const stm = selectOP.selectAllCount(data[id]);
+  const stm = Query.selectAllCount(data[id]);
   callFunc.getData(stm, res);
 });
 
-
+//-----Serch in table with record ID
 router.get("/search/:tableId/:recId", async (req, res) => {
   const tableId=req.params.tableId;
   const recId=req.params.recId;
-  const stm = selectOP.selectCTR(data[tableId],recId,"id");
-  callFunc.addDataCallBack(stm, res);
+  const stm = Query.selectCTR(data[tableId],recId,"id");
+  callFunc.getData(stm, res);
 });
 
 

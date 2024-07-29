@@ -1,7 +1,6 @@
 const db=require('./fetch_data')
 
 function getData(stm,res){
-
     db.fetchDataFromMySQL(stm, (error, results) => {
         if (error) {
           res.status(500).json({ error: 'Failed getting data' });
@@ -11,8 +10,18 @@ function getData(stm,res){
       });
 }
 
-function addDataCallBack(stm,res){
 
+function DBO(stm,res,message){
+  db.fetchDataFromMySQL(stm, (error, results) => {
+      if (error) {
+        res.status(500).json({ error: message });
+      } else {
+        res.json({Data:results});
+      }
+    });
+}
+
+function addDataCallBack(stm,res){
   db.fetchDataFromMySQL(stm, (error, results) => {
       if (error) {
         res.status(500).json({ error: 'Error addings' });
@@ -22,4 +31,4 @@ function addDataCallBack(stm,res){
     });
 }
 
-module.exports={getData,addDataCallBack}
+module.exports={getData,addDataCallBack,DBO}
