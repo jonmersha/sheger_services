@@ -26,7 +26,7 @@ let table=['category','merchant_store','product','product_order','stock_bin','us
 router.get("/data/:tableId", async (req, res) => {
   const ID=req.params.tableId;
   const stm = Query.all(table[ID]);
-  
+
   callFunc.DBO(stm, res,'Error Getting Data!!');
 });
 
@@ -45,7 +45,15 @@ router.get("/search/:tableId/:recId", async (req, res) => {
   const stm = Query.selectCTR(data[tableId],recId,"id");
   callFunc.getData(stm, res);
 });
+//--- Merchant Product BY category
+router.get("/product/:val1/:val2", async (req, res) => {
+  
+  const id1=req.params.val1;
+  const id2=req.params.val2;
 
+  const stm = Query.select2key('product','category',id1,'merchant_id',id2);
+  callFunc.getData(stm, res);
+});
 
 
 

@@ -15,8 +15,13 @@ function selectCTR(tableName,id,KEY){
     return `SELECT * FROM ${tableName} where ${KEY}=${id}`;
 
 }
+//================================================================
+function select2key(tableName,key1,id1,key2,id2){
+    return `SELECT * FROM ${tableName} where ${key1}=${id1} and ${key2}=${id2} `;
+
+}
 function selectCTRCount(tableName,id,KEY){
     return `SELECT Count(*) as count FROM ${tableName} where ${KEY}=${id}`;
 
 }
-module.exports={all,selectCTR,selectAllCount,selectCTRCount}
+module.exports={all,selectCTR,selectAllCount,selectCTRCount,select2key}
