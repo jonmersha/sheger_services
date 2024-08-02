@@ -17,7 +17,10 @@ function selectAllCount(tableName){
 //================================================================
 function selectCTR(tableName,id,KEY){
     return `SELECT * FROM ${tableName} where ${KEY}=${id}`;
-
+}
+//================================================================
+function selectCTRString(tableName,id,KEY){
+    return `SELECT * FROM ${tableName} where ${KEY}='${id}'`;
 }
 //================================================================
 function select2key(tableName,key1,id1,key2,id2){
@@ -28,4 +31,4 @@ function selectCTRCount(tableName,id,KEY){
     return `SELECT Count(*) as count FROM ${tableName} where ${KEY}=${id}`;
 
 }
-module.exports={all,selectCTR,selectAllCount,selectCTRCount,select2key,all_by_merchant}
+module.exports={all,selectCTR,selectAllCount,selectCTRCount,select2key,all_by_merchant,selectCTRString}

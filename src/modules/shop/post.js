@@ -20,11 +20,12 @@ const callFunc=require('./call_backs')
  * 6:'users'
  */
 let data=['category','merchant_store','product','product_order','stock_bin','users']
-//----Addisn Data To Database Table
+//----Add  Data To Database Table
 router.post('/add/:id', (req, res) => {
   const id=req.params.id;
   let stm=insertOP.insert(data[id],req.body)
   callFunc.addDataCallBack(stm,res);
  });
 
+ 
 module.exports = router;

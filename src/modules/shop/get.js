@@ -52,6 +52,13 @@ router.get("/search/:tableId/:recId", async (req, res) => {
   const stm = Query.selectCTR(data[tableId],recId,"id");
   callFunc.getData(stm, res);
 });
+
+//-----Get Users with Email ID
+router.get("/user/:email", async (req, res) => {
+  const email=req.params.email;
+  const stm = Query.selectCTRString('users',email,"user_email");
+  callFunc.getData(stm, res);
+});
 //--- Merchant Product BY category
 router.get("/product/:val1/:val2", async (req, res) => {
   

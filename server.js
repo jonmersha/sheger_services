@@ -16,6 +16,9 @@ app.get("/test", (req, res) => {
   );
 });
 ///Aduit System Services serivice is chaged well
+
+
+
 //============================================
 const ams_get = require("./src/modules/audit/get");
 app.use("/ams", ams_get);
@@ -30,6 +33,11 @@ app.use("/shopping", shoping_get);
 
 const shoping_post = require("./src/modules/shop/post");
 app.use("/shopping", shoping_post);
+
+//============================================
+const shopping_update = require("./src/modules/shop/update");
+app.use("/shopping", shopping_update);
+
 //==================================================
 
 ///parking serivice
