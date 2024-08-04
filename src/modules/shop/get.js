@@ -44,7 +44,7 @@ router.get("/data/:tableId/:id", async (req, res) => {
 //----Counting Records in the tables
 router.get("/count/:id", async (req, res) => {
   const id = req.params.id;
-  const stm = Query.selectAllCount(data[id]);
+  const stm = Query.selectAllCount(table[id]);
   callFunc.getData(stm, res);
 });
 
@@ -52,7 +52,7 @@ router.get("/count/:id", async (req, res) => {
 router.get("/search/:tableId/:recId", async (req, res) => {
   const tableId = req.params.tableId;
   const recId = req.params.recId;
-  const stm = Query.selectCTR(data[tableId], recId, "id");
+  const stm = Query.selectCTR(table[tableId], recId, "id");
   callFunc.getData(stm, res);
 });
 
