@@ -34,7 +34,7 @@ app.use("/shopping", shopping_update);
 
 //==================================================
 
-///parking serivice
+///parking serivices
 const parkingService = require("./src/modules/parking/parking");
 app.use("/parking", parkingService);
 
