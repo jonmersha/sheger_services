@@ -3,15 +3,37 @@ const app = express();
 var cors = require("cors");
 
 const port = 3000;
-
 app.use(cors());
 app.use(express.json());
-
 app.use("/static", express.static("public"));
 app.use("/movie", express.static("public/movie"));
 app.use("/shoping", express.static("public/shoping/images"));
 
+
+app.get("/test", (req, res) => {
+  res.send(
+    "This Is my task to test every thing again testing continued on the activityy"
+  );
+});
+
+//Forex
+//============================================
+const forex_get = require("./src/modules/forex/get");
+app.use("/forex", forex_get);
+
+//=========================================
+const forex_post = require("./src/modules/forex/post");
+app.use("/forex", forex_post);
+
+//============================================
+const forex_update = require("./src/modules/forex/update");
+app.use("/forex", forex_update);
+
+
+
 ///Aduit System Services serivice is chaged well
+
+
 
 //============================================
 const ams_get = require("./src/modules/audit/get");
@@ -34,7 +56,7 @@ app.use("/shopping", shopping_update);
 
 //==================================================
 
-///parking serivices
+///parking serivice
 const parkingService = require("./src/modules/parking/parking");
 app.use("/parking", parkingService);
 
@@ -57,12 +79,6 @@ app.use("/shaibuna", shaiBunnaService);
 //Remote Service Configurations
 app.listen();
 //Local service Configurations
-
-// app.post("/upd", upload.single("file"), (req, res) => {
-//   res.send("File uploaded successfully");
-// });
-
 // app.listen(port, () => {
 //   console.log(`Server Statrted @ ${port}`);
 // });
-//
