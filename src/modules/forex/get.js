@@ -77,7 +77,7 @@ router.get("/rate/new",(req,res)=>{
     currency.id AS currency_id,
     currency.name AS currency_name,
     currency.description AS description,
-    currency.logo AS logo
+    currency.logo AS currency_logo
 
 
 FROM
