@@ -77,8 +77,8 @@ const shaiBunnaService = require("./src/modules/shaibunna/shai_bunna");
 app.use("/shaibuna", shaiBunnaService);
 
 //Remote Service Configurations
-app.listen();
+//app.listen();
 //Local service Configurations
-// app.listen(port, () => {
-//   console.log(`Server Statrted @ ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`Server Statrted @ ${port}`);
+});
