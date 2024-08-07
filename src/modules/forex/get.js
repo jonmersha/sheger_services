@@ -75,7 +75,11 @@ router.get("/rate/new",(req,res)=>{
     bank.color_main,
     bank.email_address AS bank_email,
     currency.id AS currency_id,
-    currency.name AS currency_name
+    currency.name AS currency_name,
+    currency.description AS description,
+    currency.logo AS logo
+
+
 FROM
     rate
 JOIN
