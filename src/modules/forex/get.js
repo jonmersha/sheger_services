@@ -73,6 +73,8 @@ router.get("/rate/new",(req,res)=>{
     bank.bank_name,
     bank.logo,
     bank.color_main,
+    bank.color_back,
+    bank.color_text,
     bank.email_address AS bank_email,
     currency.id AS currency_id,
     currency.name AS currency_name,
