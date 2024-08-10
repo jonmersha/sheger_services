@@ -9,7 +9,6 @@ app.use("/static", express.static("public"));
 app.use("/movie", express.static("public/movie"));
 app.use("/shoping", express.static("public/shoping/images"));
 
-
 app.get("/test", (req, res) => {
   res.send(
     "This Is my task to test every thing again testing continued on the activityy"
@@ -29,11 +28,7 @@ app.use("/forex", forex_post);
 const forex_update = require("./src/modules/forex/update");
 app.use("/forex", forex_update);
 
-
-
 ///Aduit System Services serivice is chaged well
-
-
 
 //============================================
 const ams_get = require("./src/modules/audit/get");
