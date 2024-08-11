@@ -99,9 +99,48 @@ JOIN (
        currency_id
 ) AS LatestRates ON
 rate.currency_id = LatestRates.currency_id
-AND rate.rate_date = LatestRates.max_rate_date
-;
-`;
+and  rate.buying_cash=max_buying_cash
+  `;
+  //   SELECT
+  //     rate.id AS rate_id,
+  //     rate.rate_date,
+  //     rate.buying_cash,
+  //     rate.buying_transaction,
+  //     rate.selling_cash,
+  //     rate.selling_transaction,
+  //     bank.id AS bank_id,
+  //     bank.short_name,
+  //     bank.bank_name,
+  //     bank.logo,
+  //     bank.color_main,
+  //     bank.color_back,
+  //     bank.color_text,
+  //     bank.email_address AS bank_email,
+  //     currency.id AS currency_id,
+  //     currency.name AS currency_name,
+  //     currency.description AS description,
+  //     currency.logo AS currency_logo
+  // FROM
+  //     rate
+  // JOIN
+  //     bank ON rate.bank_id = bank.id
+  // JOIN
+  //     currency ON rate.currency_id = currency.id
+  // JOIN (
+  //     SELECT
+  //         currency_id,
+  //         MAX(rate_date) AS max_rate_date,
+  //         MAX(buying_cash) AS max_buying_cash
+  //     FROM
+  //         rate
+  //     GROUP BY
+  //        currency_id
+  // ) AS LatestRates ON
+  // rate.currency_id = LatestRates.currency_id
+  // AND rate.rate_date = LatestRates.max_rate_date
+  // ;
+  // `;
+
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
 
