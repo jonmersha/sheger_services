@@ -144,6 +144,59 @@ and  rate.buying_cash=max_buying_cash
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
 
+router.get("/rates/latest", (req, res) => {
+  const stm = `with c as (
+SELECT 
+    bank_id, currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id,currency_id
+),
+ rates as (select 
+ c.bank_id,
+ c.currency_id,
+ c.latest_rate_date,
+ rate.buying_cash,
+ rate.selling_cash,
+ rate.buying_transaction,
+ rate.selling_transaction,
+ (rate.selling_cash-rate.buying_cash) as cash_diff,
+ (rate.selling_transaction-rate.buying_transaction) as tran_diff
+ 
+ from c
+inner join rate on rate.bank_id=c.bank_id
+ where c.latest_rate_date=rate.rate_date
+ order by c.currency_id
+)
+select 
+	rates.bank_id,
+    bank.short_name,
+    bank.bank_name,
+    bank.address,
+    bank.phone_land_line,
+    bank.email_address,
+    bank.logo,
+    bank.color_main,
+    bank.color_back,
+    bank.color_text,
+	rates.currency_id,
+    rates.latest_rate_date,
+    rates.buying_cash,
+    rates.selling_cash,
+    rates.buying_transaction,
+    rates.selling_transaction,
+    rates.cash_diff,
+    rates.tran_diff,
+    currency.id,
+    currency.name,
+    currency.description,
+    currency.logo
+ from rates
+left join bank on bank.id=rates.bank_id
+left join currency on rates.currency_id=currency.id`;
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
+
 router.get("/rate/new", (req, res) => {
   const stm = `
   SELECT
