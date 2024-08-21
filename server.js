@@ -5,6 +5,7 @@ var cors = require("cors");
 const port = 3000;
 app.use(cors());
 app.use(express.json());
+app.use("/", express.static("public"));
 app.use("/static", express.static("public"));
 app.use("/movie", express.static("public/movie"));
 app.use("/shoping", express.static("public/shoping/images"));
