@@ -201,6 +201,251 @@ ORDER BY rr.currency_id;
 
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
+router.get("/rate/cbuying/max", (req, res) => {
+  const stm = `
+  WITH latest_rates AS (
+  SELECT 
+    bank_id, 
+    currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id, currency_id
+),
+ranked_rates AS (
+  SELECT
+    r.bank_id,
+    r.id,
+    r.currency_id,
+    lr.latest_rate_date,
+    r.buying_cash,
+    r.selling_cash,
+    r.buying_transaction,
+    r.selling_transaction,
+    (r.selling_cash - r.buying_cash) AS cash_diff,
+    (r.selling_transaction - r.buying_transaction) AS tran_diff,
+    ROW_NUMBER() OVER (PARTITION BY r.currency_id ORDER BY r.buying_cash DESC) AS rn
+  FROM rate r
+  INNER JOIN latest_rates lr 
+    ON r.bank_id = lr.bank_id 
+    AND r.currency_id = lr.currency_id 
+    AND r.rate_date = lr.latest_rate_date
+)
+SELECT 
+  rr.bank_id,
+  b.short_name,
+  b.bank_name,
+  b.address,
+  b.phone_land_line,
+  b.email_address as bank_email,
+  b.logo,
+  b.color_main,
+  b.color_back,
+  b.color_text,
+  rr.currency_id,
+  rr.latest_rate_date as rate_date,
+  rr.buying_cash,
+  rr.selling_cash,
+  rr.buying_transaction,
+  rr.selling_transaction,
+  rr.cash_diff,
+  rr.tran_diff,
+  rr.id as rate_id,
+  c.name as currency_name,
+  c.description,
+  c.logo as currency_logo
+FROM ranked_rates rr
+LEFT JOIN bank b ON b.id = rr.bank_id
+LEFT JOIN currency c ON rr.currency_id = c.id
+WHERE rr.rn = 1
+ORDER BY rr.currency_id;
+
+`;
+
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
+router.get("/rate/cselling/min", () => {
+  const stm = `
+  WITH latest_rates AS (
+  SELECT 
+    bank_id, 
+    currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id, currency_id
+),
+ranked_rates AS (
+  SELECT
+    r.bank_id,
+    r.id,
+    r.currency_id,
+    lr.latest_rate_date,
+    r.buying_cash,
+    r.selling_cash,
+    r.buying_transaction,
+    r.selling_transaction,
+    (r.selling_cash - r.buying_cash) AS cash_diff,
+    (r.selling_transaction - r.buying_transaction) AS tran_diff,
+    ROW_NUMBER() OVER (PARTITION BY r.currency_id ORDER BY r.selling_cash ASC) AS rn
+  FROM rate r
+  INNER JOIN latest_rates lr 
+    ON r.bank_id = lr.bank_id 
+    AND r.currency_id = lr.currency_id 
+    AND r.rate_date = lr.latest_rate_date
+)
+SELECT 
+  rr.bank_id,
+  b.short_name,
+  b.bank_name,
+  b.address,
+  b.phone_land_line,
+  b.email_address AS bank_email,
+  b.logo,
+  b.color_main,
+  b.color_back,
+  b.color_text,
+  rr.currency_id,
+  rr.latest_rate_date AS rate_date,
+  rr.buying_cash,
+  rr.selling_cash,
+  rr.buying_transaction,
+  rr.selling_transaction,
+  rr.cash_diff,
+  rr.tran_diff,
+  rr.id AS rate_id,
+  c.name AS currency_name,
+  c.description,
+  c.logo AS currency_logo
+FROM ranked_rates rr
+LEFT JOIN bank b ON b.id = rr.bank_id
+LEFT JOIN currency c ON rr.currency_id = c.id
+WHERE rr.rn = 1
+ORDER BY rr.currency_id;
+
+  `;
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
+
+router.get("/rate/trselling/min", () => {
+  const stm = `
+  WITH latest_rates AS (
+  SELECT 
+    bank_id, 
+    currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id, currency_id
+),
+ranked_rates AS (
+  SELECT
+    r.bank_id,
+    r.id,
+    r.currency_id,
+    lr.latest_rate_date,
+    r.buying_cash,
+    r.selling_cash,
+    r.buying_transaction,
+    r.selling_transaction,
+    (r.selling_cash - r.buying_cash) AS cash_diff,
+    (r.selling_transaction - r.buying_transaction) AS tran_diff,
+    ROW_NUMBER() OVER (PARTITION BY r.currency_id ORDER BY r.selling_transaction ASC) AS rn
+  FROM rate r
+  INNER JOIN latest_rates lr 
+    ON r.bank_id = lr.bank_id 
+    AND r.currency_id = lr.currency_id 
+    AND r.rate_date = lr.latest_rate_date
+)
+SELECT 
+  rr.bank_id,
+  b.short_name,
+  b.bank_name,
+  b.address,
+  b.phone_land_line,
+  b.email_address AS bank_email,
+  b.logo,
+  b.color_main,
+  b.color_back,
+  b.color_text,
+  rr.currency_id,
+  rr.latest_rate_date AS rate_date,
+  rr.buying_cash,
+  rr.selling_cash,
+  rr.buying_transaction,
+  rr.selling_transaction,
+  rr.cash_diff,
+  rr.tran_diff,
+  rr.id AS rate_id,
+  c.name AS currency_name,
+  c.description,
+  c.logo AS currency_logo
+FROM ranked_rates rr
+LEFT JOIN bank b ON b.id = rr.bank_id
+LEFT JOIN currency c ON rr.currency_id = c.id
+WHERE rr.rn = 1
+ORDER BY rr.currency_id;
+  `;
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
+
+router.get("/rate/trbuying/max", () => {
+  const stm = `
+  WITH latest_rates AS (
+  SELECT 
+    bank_id, 
+    currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id, currency_id
+),
+ranked_rates AS (
+  SELECT
+    r.bank_id,
+    r.id,
+    r.currency_id,
+    lr.latest_rate_date,
+    r.buying_cash,
+    r.selling_cash,
+    r.buying_transaction,
+    r.selling_transaction,
+    (r.selling_cash - r.buying_cash) AS cash_diff,
+    (r.selling_transaction - r.buying_transaction) AS tran_diff,
+    ROW_NUMBER() OVER (PARTITION BY r.currency_id ORDER BY r.buying_transaction DESC) AS rn
+  FROM rate r
+  INNER JOIN latest_rates lr 
+    ON r.bank_id = lr.bank_id 
+    AND r.currency_id = lr.currency_id 
+    AND r.rate_date = lr.latest_rate_date
+)
+SELECT 
+  rr.bank_id,
+  b.short_name,
+  b.bank_name,
+  b.address,
+  b.phone_land_line,
+  b.email_address AS bank_email,
+  b.logo,
+  b.color_main,
+  b.color_back,
+  b.color_text,
+  rr.currency_id,
+  rr.latest_rate_date AS rate_date,
+  rr.buying_cash,
+  rr.selling_cash,
+  rr.buying_transaction,
+  rr.selling_transaction,
+  rr.cash_diff,
+  rr.tran_diff,
+  rr.id AS rate_id,
+  c.name AS currency_name,
+  c.description,
+  c.logo AS currency_logo
+FROM ranked_rates rr
+LEFT JOIN bank b ON b.id = rr.bank_id
+LEFT JOIN currency c ON rr.currency_id = c.id
+WHERE rr.rn = 1
+ORDER BY rr.currency_id;
+  `;
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
 
 router.get("/rates/latest", (req, res) => {
   const stm = `with c as (
@@ -237,7 +482,7 @@ select
     bank.color_main,
     bank.color_back,
     bank.color_text,
-	rates.currency_id,
+	  rates.currency_id,
     rates.latest_rate_date,
     rates.buying_cash,
     rates.selling_cash,
