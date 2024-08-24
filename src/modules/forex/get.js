@@ -62,45 +62,45 @@ WHERE
 });
 
 router.get("/rate/max", (req, res) => {
-  const stm = `
-  SELECT
-    rate.id AS rate_id,
-    rate.rate_date,
-    rate.buying_cash,
-    rate.buying_transaction,
-    rate.selling_cash,
-    rate.selling_transaction,
-    bank.id AS bank_id,
-    bank.short_name,
-    bank.bank_name,
-    bank.logo,
-    bank.color_main,
-    bank.color_back,
-    bank.color_text,
-    bank.email_address AS bank_email,
-    currency.id AS currency_id,
-    currency.name AS currency_name,
-    currency.description AS description,
-    currency.logo AS currency_logo
-FROM
-    rate
-JOIN
-    bank ON rate.bank_id = bank.id
-JOIN
-    currency ON rate.currency_id = currency.id
-JOIN (
-    SELECT 
-        currency_id,
-        MAX(rate_date) AS max_rate_date,
-        MAX(buying_cash) AS max_buying_cash
-    FROM 
-        rate
-    GROUP BY 
-       currency_id
-) AS LatestRates ON
-rate.currency_id = LatestRates.currency_id
-and  rate.buying_cash=max_buying_cash
-  `;
+  //   const stm = `
+  //   SELECT
+  //     rate.id AS rate_id,
+  //     rate.rate_date,
+  //     rate.buying_cash,
+  //     rate.buying_transaction,
+  //     rate.selling_cash,
+  //     rate.selling_transaction,
+  //     bank.id AS bank_id,
+  //     bank.short_name,
+  //     bank.bank_name,
+  //     bank.logo,
+  //     bank.color_main,
+  //     bank.color_back,
+  //     bank.color_text,
+  //     bank.email_address AS bank_email,
+  //     currency.id AS currency_id,
+  //     currency.name AS currency_name,
+  //     currency.description AS description,
+  //     currency.logo AS currency_logo
+  // FROM
+  //     rate
+  // JOIN
+  //     bank ON rate.bank_id = bank.id
+  // JOIN
+  //     currency ON rate.currency_id = currency.id
+  // JOIN (
+  //     SELECT
+  //         currency_id,
+  //         MAX(rate_date) AS max_rate_date,
+  //         MAX(buying_cash) AS max_buying_cash
+  //     FROM
+  //         rate
+  //     GROUP BY
+  //        currency_id
+  // ) AS LatestRates ON
+  // rate.currency_id = LatestRates.currency_id
+  // and  rate.buying_cash=max_buying_cash
+  //   // `;
   //   SELECT
   //     rate.id AS rate_id,
   //     rate.rate_date,
@@ -140,6 +140,64 @@ and  rate.buying_cash=max_buying_cash
   // AND rate.rate_date = LatestRates.max_rate_date
   // ;
   // `;
+  const stm = `
+  WITH latest_rates AS (
+  SELECT 
+    bank_id, 
+    currency_id,
+    MAX(rate_date) AS latest_rate_date
+  FROM rate
+  GROUP BY bank_id, currency_id
+),
+ranked_rates AS (
+  SELECT
+    r.bank_id,
+    r.id,
+    r.currency_id,
+    lr.latest_rate_date,
+    r.buying_cash,
+    r.selling_cash,
+    r.buying_transaction,
+    r.selling_transaction,
+    (r.selling_cash - r.buying_cash) AS cash_diff,
+    (r.selling_transaction - r.buying_transaction) AS tran_diff,
+    ROW_NUMBER() OVER (PARTITION BY r.currency_id ORDER BY r.buying_cash DESC) AS rn
+  FROM rate r
+  INNER JOIN latest_rates lr 
+    ON r.bank_id = lr.bank_id 
+    AND r.currency_id = lr.currency_id 
+    AND r.rate_date = lr.latest_rate_date
+)
+SELECT 
+  rr.bank_id,
+  b.short_name,
+  b.bank_name,
+  b.address,
+  b.phone_land_line,
+  b.email_address as bank_email,
+  b.logo,
+  b.color_main,
+  b.color_back,
+  b.color_text,
+  rr.currency_id,
+  rr.latest_rate_date as rate_date,
+  rr.buying_cash,
+  rr.selling_cash,
+  rr.buying_transaction,
+  rr.selling_transaction,
+  rr.cash_diff,
+  rr.tran_diff,
+  rr.id as rate_id,
+  c.name as currency_name,
+  c.description,
+  c.logo as currency_logo
+FROM ranked_rates rr
+LEFT JOIN bank b ON b.id = rr.bank_id
+LEFT JOIN currency c ON rr.currency_id = c.id
+WHERE rr.rn = 1
+ORDER BY rr.currency_id;
+
+`;
 
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
