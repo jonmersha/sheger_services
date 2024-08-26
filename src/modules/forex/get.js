@@ -476,7 +476,7 @@ SELECT
 FROM ranked_rates rr
 LEFT JOIN bank b ON b.id = rr.bank_id
 LEFT JOIN currency c ON rr.currency_id = c.id
-WHERE rr.rn <= 4
+WHERE rr.rn <= 4 and rr.buying_cash>0
 ORDER BY rr.currency_id, rr.buying_cash DESC;
 `;
   callFunc.DBO(stm, res, "Error Getting Data!!");
