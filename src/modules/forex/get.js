@@ -23,6 +23,7 @@ let table = [
   "customer",
   "currency",
   "rate",
+  "promotions",
   "bank_posted",
   "customer_posted",
 ];
