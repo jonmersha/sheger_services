@@ -525,6 +525,26 @@ AND rate.rate_date = LatestRates.max_rate_date;`;
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
 
+router.get("/rate/currency/trend", async (req, res) => {
+  const stm = `SELECT
+    DATE(rate.rate_date) AS rate_date,
+    rate.currency_id,
+    currency.name,
+    AVG(rate.buying_cash) AS avg_buying_cash
+FROM
+    rate
+INNER JOIN
+    currency ON currency.id = rate.currency_id
+GROUP BY
+    DATE(rate.rate_date),
+    rate.currency_id,
+    currency.name
+ORDER BY
+    currency_id;
+`;
+  callFunc.DBO(stm, res, "Error Getting Data!!");
+});
+
 router.get("/data/:tableId/:id", async (req, res) => {
   const ID = req.params.tableId;
   const merchantID = req.params.id;
