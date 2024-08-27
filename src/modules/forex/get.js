@@ -530,6 +530,8 @@ router.get("/rate/currency/trend", async (req, res) => {
     DATE(rate.rate_date) AS rate_date,
     rate.currency_id,
     currency.name,
+    currency.description,
+     currency.logo,
     AVG(rate.buying_cash) AS avg_buying_cash
 FROM
     rate
