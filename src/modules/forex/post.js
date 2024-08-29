@@ -27,6 +27,7 @@ let table = [
   "systemu",
   "bank_posted",
   "customer_posted",
+  "systemu",
 ];
 
 //----Add  Data To Database Table
