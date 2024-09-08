@@ -42,6 +42,15 @@ router.get("/rate/today", (req, res) => {
   callFunc.DBO(stm, res, "Error Getting Data!!");
 });
 
+//SELECT * FROM `allAVtrend` WHERE rate_date >= CURDATE() - INTERVAL 20 DAY;
+
+//----Counting Records in the tables
+router.get("/trend/:count", async (req, res) => {
+  const maxdays = req.params.count;
+  const stm = `SELECT * FROM allAVtrend WHERE rate_date >= CURDATE() - INTERVAL ${maxdays} DAY;`; //Query.selectAllCount(data[id]);
+  callFunc.getData(stm, res);
+});
+
 router.get("/rate/max", (req, res) => {
   const stm = `select * from maxRate`;
 

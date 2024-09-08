@@ -82,3 +82,20 @@ ALTER TABLE `rate`
 ALTER TABLE `rate`
   ADD CONSTRAINT `rate_to_bank` FOREIGN KEY (`bank_id`) REFERENCES `bank` (`id`),
   ADD CONSTRAINT `rate_to_currency` FOREIGN KEY (`currency_id`) REFERENCES `currency` (`id`);
+
+
+INSERT INTO rate (
+  currency_id ,
+   buying_cash , 
+   selling_cash , 
+   buying_transaction , 
+   rate_date , 
+   selling_transaction , 
+   bank_id) VALUES(
+    "1" , 
+    "400" , 
+    "100" , 
+    "100" , 
+    "08-30-2024" ,
+     "100" ,
+      "1")
