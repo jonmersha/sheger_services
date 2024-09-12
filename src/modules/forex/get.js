@@ -15,8 +15,11 @@ const callFunc = require("./call_backs");
  * 1:'customer',
  * 2:'currency',
  * 3:'rate',
- * 4:'bank_posted'
- * 5:'customer_posted',
+ * 4: "promotions",
+ * 5:'bank_posted'
+ * 6:'customer_posted',
+ * 7:'systemu',
+ * 8:'top_offer',
  */
 let table = [
   "bank",
@@ -27,6 +30,7 @@ let table = [
   "bank_posted",
   "customer_posted",
   "systemu",
+  "top_offer",
 ];
 
 //-----All Data Return
