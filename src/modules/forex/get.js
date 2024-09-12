@@ -31,6 +31,7 @@ let table = [
   "customer_posted",
   "systemu",
   "top_offer",
+  "offer",
 ];
 
 //-----All Data Return
