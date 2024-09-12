@@ -44,10 +44,18 @@ router.get("/rate/today", (req, res) => {
 
 //SELECT * FROM `allAVtrend` WHERE rate_date >= CURDATE() - INTERVAL 20 DAY;
 
-//----Counting Records in the tables
-router.get("/trend/:count", async (req, res) => {
-  const maxdays = req.params.count;
-  const stm = `SELECT * FROM allAVtrend WHERE rate_date >= CURDATE() - INTERVAL ${maxdays} DAY;`; //Query.selectAllCount(data[id]);
+//All Trensd By date interval
+router.get("/trend/:interval", async (req, res) => {
+  const intervals = req.params.interval;
+  const stm = `SELECT * FROM allAVtrend WHERE rate_date >= CURDATE() - INTERVAL ${intervals} DAY;`; //Query.selectAllCount(data[id]);
+  callFunc.getData(stm, res);
+});
+//Per bank Currency trend
+router.get("/bank/trend/:bankID/:interval", async (req, res) => {
+  const bankId = req.params.bankID;
+  const intervals = req.params.interval;
+
+  const stm = `SELECT * FROM rate JOIN currency on currency.id=rate.currency_id where bank_id=${bankId} and rate_date >= CURDATE() - INTERVAL ${intervals} DAY; `; //Query.selectAllCount(data[id]);
   callFunc.getData(stm, res);
 });
 
