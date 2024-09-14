@@ -26,7 +26,7 @@ let table = [
   "customer",
   "currency",
   "rate",
-  "promotions",
+  "promotion",
   "bank_posted",
   "customer_posted",
   "systemu",
